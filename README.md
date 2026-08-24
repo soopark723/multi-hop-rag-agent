@@ -1,5 +1,3 @@
-# README.md
-
 # multi-hop-rag-agent
 
 An agentic RAG system built around [HotpotQA](https://huggingface.co/datasets/hotpotqa/hotpot_qa)'s distractor config — a multi-hop question-answering benchmark where each question needs facts combined from two of ten given Wikipedia paragraphs (the rest are distractors). Unlike single-shot RAG, the agent retrieves, judges whether it has enough evidence, and retrieves again with a refined query if not — up to 3 hops — before synthesizing a final answer and citing its sources.
