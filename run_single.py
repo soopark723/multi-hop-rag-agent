@@ -1,9 +1,6 @@
 # run_single.py
 # Dependencies:
 #   pip install langgraph langchain_ollama langchain_core datasets rank_bm25 python-dotenv
-#
-# Uses local Ollama (qwen2.5) rather than Hugging Face Inference Providers —
-# no HF_TOKEN or API quota needed, just Ollama running with qwen2.5 pulled.
 
 import argparse
 
