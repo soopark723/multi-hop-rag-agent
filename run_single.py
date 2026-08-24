@@ -1,16 +1,15 @@
 # run_single.py
 # Dependencies:
-#   pip install langgraph langchain_huggingface langchain_core datasets rank_bm25 python-dotenv
+#   pip install langgraph langchain_ollama langchain_core datasets rank_bm25 python-dotenv
 #
-# Requires HF_TOKEN set in your .env — reuses the same Hugging Face route as
-# your other repos, not local Ollama, so evaluation stays reasonably fast.
+# Uses local Ollama (qwen2.5) rather than Hugging Face Inference Providers —
+# no HF_TOKEN or API quota needed, just Ollama running with qwen2.5 pulled.
 
 import argparse
-import os
 
 from datasets import load_dataset
 from dotenv import load_dotenv
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_ollama import ChatOllama
 
 from graph import build_graph
 from retriever import ExampleRetriever, gold_titles
@@ -20,15 +19,7 @@ load_dotenv()
 
 
 def build_llm():
-    llm_endpoint = HuggingFaceEndpoint(
-        repo_id="Qwen/Qwen2.5-Coder-32B-Instruct",
-        task="text-generation",
-        provider="nscale",
-        huggingfacehub_api_token=os.getenv("HF_TOKEN"),
-        max_new_tokens=512,
-        temperature=0,
-    )
-    return ChatHuggingFace(llm=llm_endpoint)
+    return ChatOllama(model="qwen2.5", temperature=0)
 
 
 def main():
